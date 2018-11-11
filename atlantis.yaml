@@ -5,3 +5,13 @@ projects:
   autoplan:
     when_modified: ["*.tf", "../modules/**.tf"]
     enabled: true
+  apply_requirements: ["approved"]
+workflows:
+  testF5Workflow:
+    plan:
+      steps:
+      - init
+      - plan
+    apply:
+      steps:
+      - apply
