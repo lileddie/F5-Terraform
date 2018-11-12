@@ -55,7 +55,7 @@ resource "bigip_ltm_virtual_server" "https" {
   name = "/Common/intranet_https"
   destination = "10.33.7.23"
   port = 443
-  pool = "intraPool"
+  pool = "/Common/intraPool"
   client_profiles = ["/Common/tcp","/Common/http","/Common/inranetSSL"]
   source_address_translation = "automap"
   translate_address = "enabled"
@@ -66,7 +66,7 @@ resource "bigip_ltm_virtual_server" "http" {
   name = "/Common/intranet_http"
   destination = "10.33.7.23"
   port = 80
-  pool = "intraPool"
+  pool = "/Common/intraPool"
   client_profiles = ["/Common/tcp","/Common/http"]
   source_address_translation = "automap"
   translate_address = "enabled"
