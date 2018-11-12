@@ -1,6 +1,5 @@
 version: 2
 projects:
-- dir: /terraform/F5
   autoplan:
     when_modified: ["*.tf", "../modules/**.tf"]
     enabled: true
