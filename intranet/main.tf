@@ -24,7 +24,7 @@ resource "bigip_ltm_node" "intra2" {
   address = "10.32.10.65"
 }
 resource "bigip_ltm_node" "intra3" {
-  name = "/Common/intra2"
+  name = "/Common/intra3"
   address = "10.32.10.66"
 }
 
@@ -38,9 +38,9 @@ resource "bigip_ltm_pool" "intraPool" {
 
 resource "bigip_ltm_pool_attachment" "node-intraPool" {
   pool = "/Common/intraPool"
-  node = "${bigip_ltm_node.node.intra1}:80"
-  node = "${bigip_ltm_node.node.intra2}:80"
-  node = "${bigip_ltm_node.node.intra2}:80"
+  node = "/Common/intra1:80"
+  node = "/Common/intra2:80"
+  node = "/Common/intra3:80"
 }
 
 resource "bigip_ltm_virtual_server" "https" {
@@ -49,6 +49,18 @@ resource "bigip_ltm_virtual_server" "https" {
   port = 443
   pool = "/Common/intraPool"
   profiles = ["/Common/tcp","/Common/inranetSSL","/Common/http"]
+  source_address_translation = "automap"
+  translate_address = "enabled"
+  translate_port = "enabled"
+  vlans_disabled = true
+}
+
+resource "bigip_ltm_virtual_server" "http" {
+  name = "/Common/intranet_http"
+  destination = "10.33.7.23"
+  port = 80
+  pool = "/Common/intraPool"
+  profiles = ["/Common/tcp","/Common/http"]
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"

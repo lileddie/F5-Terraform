@@ -38,9 +38,9 @@ resource "bigip_ltm_pool" "wwwStaticPool" {
 
 resource "bigip_ltm_pool_attachment" "node-wwwStaticPool" {
   pool = "/Common/wwwStaticPool"
-  node = "${bigip_ltm_node.node.wwwStatic1}:8080"
-  node = "${bigip_ltm_node.node.wwwStatic2}:8080"
-  node = "${bigip_ltm_node.node.wwwStatic3}:8080"
+  node = "/Common/wwwStatic1:8080"
+  node = "/Common/wwwStatic2:8080"
+  node = "/Common/wwwStatic3:8080"
 }
 
 resource "bigip_ltm_virtual_server" "https" {
@@ -56,7 +56,7 @@ resource "bigip_ltm_virtual_server" "https" {
 }
 
 resource "bigip_ltm_virtual_server" "http" {
-  name = "/Common/wwwStatic_https"
+  name = "/Common/wwwStatic_http"
   destination = "10.33.8.23"
   port = 80
   pool = "/Common/intraPool"
