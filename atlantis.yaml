@@ -2,9 +2,16 @@ version: 2
 projects:
 - name: root
   dir: .
-    autoplan:
-      enabled: true
+  autoplan:
+    enabled: true
   workflow: stdF5Workflow
+#- name: intranet
+#  dir: intranet
+#  autoplan:
+#    when_modified: ["*.tf", "../modules/**.tf"]
+#    enabled: false
+#    apply_requirements: [approved]
+#  workflow: stdF5Workflow
 workflows:
   stdF5Workflow:
     plan:
