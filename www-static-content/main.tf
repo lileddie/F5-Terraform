@@ -64,10 +64,10 @@ resource "bigip_ltm_virtual_server" "https" {
 }
 
 resource "bigip_ltm_virtual_server" "http" {
-  name = "wwwStatic_http"
+  name = "/Common/wwwStatic_http"
   destination = "10.33.8.23"
   port = 80
-  pool = "/Common/intraPool"
+  pool = "intraPool"
   client_profiles = ["/Common/tcp","/Common/http"]
   source_address_translation = "automap"
   translate_address = "enabled"
