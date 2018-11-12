@@ -52,7 +52,6 @@ resource "bigip_ltm_virtual_server" "https" {
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
-  vlans_disabled = true
 }
 
 resource "bigip_ltm_virtual_server" "http" {
@@ -64,5 +63,4 @@ resource "bigip_ltm_virtual_server" "http" {
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
-  vlans_disabled = true
 }
