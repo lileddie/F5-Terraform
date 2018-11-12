@@ -2,6 +2,7 @@
 provider "bigip" {
   address = "192.168.2.5"
   username = "terraform"
+  password = ""
 }
 
 resource "bigip_ltm_monitor" "monitor80" {
