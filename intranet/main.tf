@@ -56,7 +56,7 @@ resource "bigip_ltm_virtual_server" "https" {
   destination = "10.33.7.23"
   port = 443
   pool = "/Common/intraPool"
-  profiles = ["/Common/tcp","/Common/inranetSSL","/Common/http"]
+  profiles = ["/Common/tcp","/Common/http","/Common/inranetSSL"]
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
