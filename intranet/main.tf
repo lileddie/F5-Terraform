@@ -14,7 +14,6 @@ resource "bigip_ltm_monitor" "intranet" {
   destination = "*:80"
 }
 
-#node creation
 resource "bigip_ltm_node" "intra1" {
   name = "/Common/intra1"
   address = "10.32.10.64"
