@@ -52,10 +52,10 @@ resource "bigip_ltm_pool_attachment" "intra3" {
 }
 
 resource "bigip_ltm_virtual_server" "https" {
-  name = "/Common/intranet_https"
+  name = "intranet_https"
   destination = "10.33.7.23"
   port = 443
-  pool = "/Common/intraPool"
+  pool = "intraPool"
   client_profiles = ["/Common/tcp","/Common/http","/Common/inranetSSL"]
   source_address_translation = "automap"
   translate_address = "enabled"
