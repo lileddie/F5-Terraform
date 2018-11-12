@@ -5,11 +5,3 @@ provider "bigip" {
   password = "T3rraform"
 }
 
-resource "bigip_ltm_monitor" "monitor80" {
-  name = "/Common/http_monitor_80"
-  parent = "/Common/http"
-  send = "GET /status.html\r\n"
-  timeout = "46"
-  interval = "15"
-  destination = "*:80"
-}
