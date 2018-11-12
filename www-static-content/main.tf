@@ -37,6 +37,22 @@ resource "bigip_ltm_pool" "wwwStaticPool" {
   allow_nat = "yes"
 }
 
+resource "bigip_ltm_pool_attachment" "wwwStatic1" {
+        pool = "/Common/wwwStaticPool"
+	node = "/Common/wwwStatic1:8080"
+	depends_on = ["bigip_ltm_pool.wwwStaticPool"]
+}
+resource "bigip_ltm_pool_attachment" "wwwStatic2" {
+        pool = "/Common/wwwStaticPool"
+	node = "/Common/wwwStatic2:8080"
+	depends_on = ["bigip_ltm_pool.wwwStaticPool"]
+}
+resource "bigip_ltm_pool_attachment" "wwwStatic3" {
+        pool = "/Common/wwwStaticPool"
+	node = "/Common/wwwStatic3:8080"
+	depends_on = ["bigip_ltm_pool.wwwStaticPool"]
+}
+
 resource "bigip_ltm_virtual_server" "https" {
   name = "/Common/wwwStatic_https"
   destination = "10.33.8.23"

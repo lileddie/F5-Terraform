@@ -30,10 +30,25 @@ resource "bigip_ltm_node" "intra3" {
 resource "bigip_ltm_pool" "intraPool" {
   name = "/Common/intraPool"
   load_balancing_mode = "round-robin"
-  nodes = ["intra1:80","intra2:80","intra3:80"]
   monitors = ["/Common/http_monitor_80"]
   allow_snat = "yes"
   allow_nat = "yes"
+}
+
+resource "bigip_ltm_pool_attachment" "intra1" {
+        pool = "/Common/intraPool"
+	node = "/Common/intra1:80"
+	depends_on = ["bigip_ltm_pool.intraPool"]
+}
+resource "bigip_ltm_pool_attachment" "intra2" {
+        pool = "/Common/intraPool"
+	node = "/Common/intra2:80"
+	depends_on = ["bigip_ltm_pool.intraPool"]
+}
+resource "bigip_ltm_pool_attachment" "intra3" {
+        pool = "/Common/intraPool"
+	node = "/Common/intra3:80"
+	depends_on = ["bigip_ltm_pool.intraPool"]
 }
 
 resource "bigip_ltm_virtual_server" "https" {
