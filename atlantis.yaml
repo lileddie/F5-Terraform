@@ -1,13 +1,20 @@
 version: 2
 projects:
-- dir: .  
+- name: www-static-content
+  dir: www-static-content
   autoplan:
-    when_modified: ["*.tf", "../modules/**.tf"]
+    when_modified: ["*.tf"]
+    enabled: true
+  workflow: stdF5Workflow
+- name: intranet
+  dir: intranet
+  autoplan:
+    when_modified: ["*.tf"]
     enabled: true
   apply_requirements: [approved]
-  workflow: testF5Workflow
+  workflow: stdF5Workflow
 workflows:
-  testF5Workflow:
+  stdF5Workflow:
     plan:
       steps:
       - init
