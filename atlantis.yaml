@@ -1,6 +1,6 @@
 version: 2
 projects:
-  autoplan:
+- autoplan:
     when_modified: ["*.tf", "../modules/**.tf"]
     enabled: true
   apply_requirements: [approved]
