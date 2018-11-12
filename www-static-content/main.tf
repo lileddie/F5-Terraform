@@ -31,14 +31,10 @@ resource "bigip_ltm_node" "intra3" {
 resource "bigip_ltm_pool" "wwwStaticPool" {
   name = "/Common/wwwStaticPool"
   load_balancing_mode = "round-robin"
+  nodes = ["wwwStatic1:8080","wwwStatic2:8080","wwwStatic3:8080"]
   monitors = ["/Common/http_monitor_8080"]
   allow_snat = "yes"
   allow_nat = "yes"
-}
-
-resource "bigip_ltm_pool_attachment" "node-wwwStaticPool" {
-  pool = "/Common/wwwStaticPool"
-  node = ["wwwStatic1:8080","wwwStatic2:8080","wwwStatic3:8080"]
 }
 
 resource "bigip_ltm_virtual_server" "https" {
