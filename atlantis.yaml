@@ -1,11 +1,10 @@
 version: 2
 projects:
-- name: testF5
-  dir: /terraform/F5
+- dir: .  
   autoplan:
     when_modified: ["*.tf", "../modules/**.tf"]
     enabled: true
-  apply_requirements: ["approved"]
+  apply_requirements: [approved]
   workflow: testF5Workflow
 workflows:
   testF5Workflow:
