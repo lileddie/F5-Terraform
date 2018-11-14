@@ -1,6 +1,6 @@
 # Building a Basic F5 VIP with Terraform
 
-how-to to get you starting automating your VIP builds with Terraform - including gotchas.  This is not a best practices doc but a quick-and-dirty HOW-TO.
+Getting you started automating your VIP builds with Terraform - including gotchas.  This is not a best practices doc but a quick-and-dirty HOW-TO.
 
 ## What'cha need?
 
