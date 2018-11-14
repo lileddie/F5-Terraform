@@ -1,14 +1,23 @@
 # Building a Basic F5 VIP with Terraform
 
-Getting you started automating your VIP builds with Terraform - including gotchas.  This is not a best practices doc but a quick-and-dirty HOW-TO.
+Getting you started automating your VIP builds with Terraform.  This is not a best practices doc but a quick-and-dirty HOW-TO.
 
 ## What'cha need?
 
-To use Terraform you should have a firm grasp with using the command line interface and a dedicated Linux node that you regularly back-up.  At least 1 F5 Appliance (Virtual or hardware) will to accept your configuration commands.
+To use Terraform you should have a firm grasp with using the command line interface and a dedicated Linux node that you regularly back-up and at least 1 F5 Appliance (Virtual or hardware) to accept your configuration commands.
 
 ### Configuration Prereqs
 
-Unfortunately the F5 Terraform plugin, known as a Provider in TF speak, does not allow certificate based auth, so you should create dedicated TF credentials, or use a service account if you have one.  To ensure you configure the active node in an HA environment, allow port 443 on a firewall protected floating IP address and define that as the host (more below).
+Unfortunately the F5 Terraform plugin, known as a Provider in TF speak, does not allow certificate based auth, so you should create dedicated TF credentials, or use a service account if you have one.  To ensure you configure the active node in an HA environment, allow port 443 on a firewall protected floating IP address and define that as the host.
+
+## Allow Port 443 on the floating IP
+
+ssh to the F5 node and allow port 443 to one of the floating IP addresses so we can connect to the active node:
+~~~
+modify net self 192.168.4.5 allow-service add { tcp:443 }
+~~~
+
+NOTE: In a production environment this Self-IP should be firewall protected if you are allowing logins from remote systems.  Whitelisting IPs of management servers is recommended.
 
 ### Build your stuff already
 
@@ -25,13 +34,13 @@ If you haven't have git/github, fret not!! git's easy.  Just follow this [link.]
 
 Use the text editor of your choice, [Atom](https://flight-manual.atom.io/getting-started/sections/installing-atom/) is great, or vi, pico...
 
-We have 2 separate projects created - intranet and www-static-content.  Edit intranet/terraform.tfvars:
+We have 2 separate projects created - intranet and www-static-content.  Edit intranet/terraform.tfvars adding your service account username, password, and the floating IP address you are allowing port 443 to connect to:
 ```
 f5_host = "192.168.2.5" - CHANGE ME to your IP or hostname
 f5_user = "terraform"   - CHANGE ME to your service account user
 f5_pass = "T3rraform"   - CHANGE ME to your service account password
 ```
-?Can that really be it?
+Can that really be it?
 
 ## Running the tests
 
