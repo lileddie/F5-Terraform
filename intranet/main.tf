@@ -28,6 +28,7 @@ resource "bigip_ltm_node" "intra3" {
 }
 
 resource "bigip_ltm_pool" "intraPool" {
+	depends_on = ["bigip_ltm_monitor.intranet"]
   name = "/Common/intraPool"
   load_balancing_mode = "round-robin"
   monitors = ["/Common/http_monitor_80"]
@@ -58,7 +59,7 @@ resource "bigip_ltm_virtual_server" "https" {
   port = 443
   pool = "/Common/intraPool"
   profiles = ["/Common/http"]
-  client_profiles = ["/Common/intranetSSL"]
+  client_profiles = ["/Common/clientssl"]
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
