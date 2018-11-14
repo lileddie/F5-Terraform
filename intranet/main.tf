@@ -52,22 +52,25 @@ resource "bigip_ltm_pool_attachment" "intra3" {
 }
 
 resource "bigip_ltm_virtual_server" "https" {
-  name = "intranet_https"
+  depends_on = ["bigip_ltm_pool.intraPool"]
+  name = "/Common/intranet_https"
   destination = "10.33.7.23"
   port = 443
-  pool = "intraPool"
-  client_profiles = ["/Common/tcp","/Common/http","/Common/inranetSSL"]
+  pool = "/Common/intraPool"
+  profiles = ["/Common/http"]
+  client_profiles = ["/Common/intranetSSL"]
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
 }
 
 resource "bigip_ltm_virtual_server" "http" {
+  depends_on = ["bigip_ltm_pool.intraPool"]
   name = "/Common/intranet_http"
   destination = "10.33.7.23"
   port = 80
   pool = "/Common/intraPool"
-  client_profiles = ["/Common/tcp","/Common/http"]
+  profiles = ["/Common/http"]
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
