@@ -18,7 +18,7 @@ wget https://releases.hashicorp.com/terraform/0.11.10/terraform_0.11.10_linux_am
 ```
 Clone this repo:
 ```
-git clone git@github.com:lileddie/testF5.git
+git clone git@github.com:lileddie/F5-Terraform.git
 ```
 
 If you haven't have git/github, fret not!! git's easy.  Just follow this [link.](https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git)
