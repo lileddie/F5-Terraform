@@ -53,22 +53,25 @@ resource "bigip_ltm_pool_attachment" "wwwStatic3" {
 }
 
 resource "bigip_ltm_virtual_server" "https" {
+  depends_on = ["bigip_ltm_pool.wwwStaticPool"]
   name = "/Common/wwwStatic_https"
   destination = "10.33.8.23"
   port = 443
-  pool = "wwwStaticPool"
-  client_profiles = ["/Common/tcp","/Common/http","/Common/inranetSSL"]
+  pool = "/Common/wwwStaticPool"
+  profiles = ["/Common/http"]
+  client_profiles = ["/Common/intranetSSL"]
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
 }
 
 resource "bigip_ltm_virtual_server" "http" {
+  depends_on = ["bigip_ltm_pool.wwwStaticPool"]
   name = "/Common/wwwStatic_http"
   destination = "10.33.8.23"
   port = 80
-  pool = "wwwStaticPool"
-  client_profiles = ["/Common/tcp","/Common/http"]
+  pool = "/Common/wwwStaticPool"
+  profiles = ["/Common/http"]
   source_address_translation = "automap"
   translate_address = "enabled"
   translate_port = "enabled"
