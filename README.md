@@ -473,9 +473,9 @@ Destroy complete! Resources: 1 destroyed.
 troy@ubuntu18:~/testF5/intranet$
 ```
 
-## Open Source versions for TF Enterprise
+## Open Source versions of TF Enterprise
 
-So far we have only tried [Atlantis](https://www.runatlantis.io/) which worked flawlessly to deploy projects, versioning not so much.  Each Github pull request/merge cloned the repo to a new folder without copying the tfstate file - to avoid errors and duplicate builds, make sure to use a remote and centrally located tfstate file!  Included in repo is an atlantis.yaml file for syntax purposes.
+So far we have only tried [Atlantis](https://www.runatlantis.io/) which worked great to deploy projects, versioning not so much.  Each Github pull request/merge cloned the repo to a new folder without copying the tfstate file - to avoid errors and duplicate builds make sure to use a remote and centrally located tfstate file!  Included in repo is an atlantis.yaml file for syntax purposes.
 
 ## Authors
 
