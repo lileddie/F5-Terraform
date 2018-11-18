@@ -30,7 +30,7 @@ Clone this repo:
 git clone git@github.com:lileddie/F5-Terraform.git
 ```
 
-If you haven't have git/github, fret not!! git's easy.  Just follow this [link.](https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git)
+If you haven't used git/github, fret not!! git's easy.  Just follow this [link.](https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git)
 
 Use the text editor of your choice, [Atom](https://flight-manual.atom.io/getting-started/sections/installing-atom/) is great, or vi, pico...
 
