@@ -355,19 +355,15 @@ Every project will have a .tfstate file.  Perform an ```ls``` in your project di
 
 ## Sharing TF State
 
-Since the .tfstate file is only created when you perform an terraform apply, other users that do the same locally will have a totally separate version of .tfstate - for this reason anyone using Terraform as a team needs to:
-
-* Utilize [Terraform Enterprise](https://www.terraform.io/docs/enterprise/index.html)
-* Build ONCE ONLY with [Atlantis](https://maven.apache.org/) - Manual Cleanup required per testing
-* Utilize a central build server - backing up .tfstate to ensure automatic version control
+Since the .tfstate file is only created when you perform an terraform init and updated on apply, other users that do the same locally will have a totally separate version of .tfstate - for this reason anyone using Terraform as a team needs to keep the tfstate file in a central location - with version control.  This can be done by specifying the location for the tfstate file in the root/main.tf file.
 
 ## Mopping up
 
-Terraform makes cleaning up the 20 parallel environments created for project X easy!  Simply navigate to the directory with the .tfstate file and run:
+Terraform makes cleaning up the 20 parallel environments created for project X easy!  From the root project folder simply run:
 
 ```terraform destroy```
 
-Confirm with a yes and watch your environment evaporate.  Since Terraform will attemtp to destroy as quick as it builds, some errors can be expected when items are destroyed before their dependents are cleaned up.  Simply running the destroy command a 2nd time usually clears up the issue:
+Confirm with a yes and watch your environment evaporate.  Since Terraform will attempt to destroy as quick as it builds, some errors can be expected when items are destroyed before their dependents are cleaned up.  Simply running the destroy command a 2nd time usually clears up the issue:
 ```
 troy@ubuntu18:~/testF5/intranet$ terraform destroy
 bigip_ltm_monitor.intranet: Refreshing state... (ID: /Common/http_monitor_80)
@@ -479,7 +475,7 @@ troy@ubuntu18:~/testF5/intranet$
 
 ## Open Source versions for TF Enterprise
 
-So far we have only tried [Atlantis](https://www.runatlantis.io/) which worked flawlessly to deploy projects, versioning not so much.  Each Github pull request/merge cloned the repo to a new folder without copying the tfstate file.  Errors ensue.  Included in repo is an atlantis.yaml file for syntax purposes.  If more luck with Atlantis, pt. 2 will follow.
+So far we have only tried [Atlantis](https://www.runatlantis.io/) which worked flawlessly to deploy projects, versioning not so much.  Each Github pull request/merge cloned the repo to a new folder without copying the tfstate file - to avoid errors and duplicate builds, make sure to use a remote and centrally located tfstate file!  Included in repo is an atlantis.yaml file for syntax purposes.
 
 ## Authors
 
